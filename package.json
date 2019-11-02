@@ -5,16 +5,18 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "emulator": "/Users/victorgazolli/Library/Android/sdk/emulator/emulator -avd Nexus_5_API_28 -netdelay none -netspeed full",
+    "build": "cd android && ./gradlew assembleRelease && cd ..",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
   },
   "dependencies": {
-    "@react-native-community/async-storage": "1.6.2",
-    "axios": "0.19.0",
+    "native-base": "^2.13.8",
     "react": "16.9.0",
     "react-native": "0.61.3",
     "react-native-gesture-handler": "1.4.1",
+    "react-native-vector-icons": "^6.6.0",
     "react-navigation": "3.13.0"
   },
   "devDependencies": {

@@ -1,0 +1,4 @@
+#Sat Nov 02 16:12:13 BRT 2019
+base.0=/Users/victorgazolli/projetos/apps/contele_test/android/app/build/intermediates/transforms/dexMerger/debug/0
+renamed.0=classes.dex
+path.0=classes.dex
