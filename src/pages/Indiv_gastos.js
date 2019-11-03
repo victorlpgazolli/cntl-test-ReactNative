@@ -1,19 +1,27 @@
 
 import React, { useEffect, useState } from 'react';
-import { Dimensions, Platform, StyleSheet, View, ScrollView, Text, Image, TouchableOpacity } from 'react-native'
+import { Dimensions, Platform, StyleSheet, View, ScrollView, Text, Image, ToastAndroid, TouchableOpacity } from 'react-native'
 import Icon_FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon_material from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Footer, Header } from 'native-base';
 const _width = Dimensions.get('window').width
 const _height = Dimensions.get('window').height
-var day = ''
+var day = '', trashVisible = false, deleteChecked = false;
 export default function Gastos({ navigation }) {
   const [exprense, setExprense] = useState([]);
   useEffect(() => {
     day = `${navigation.state.params.day}/09/2019 - 13h50`
     setExprense(navigation.state.params.expense)
   }, []);
-
+  trashVisible = navigation.getParam('trash', false)
+  deleteChecked = navigation.getParam('delete', false)
+  if (trashVisible) {
+    ToastAndroid.show("Clique novamente para confirmar", ToastAndroid.SHORT);
+  }
+  if (deleteChecked) {
+    ToastAndroid.show("Apagado", ToastAndroid.SHORT);
+    navigation.navigate('Gastos')
+  }
   return (
 
     <View>

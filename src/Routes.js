@@ -14,7 +14,7 @@ const tabBarOptions = {
     fontSize: 20,
   },
 }
-var searchVisible = false, editVisible = false;
+var searchVisible = false, editVisible = false, trashVisible = false;
 export default createAppContainer(
   createStackNavigator({
     Gastos: {
@@ -34,7 +34,10 @@ export default createAppContainer(
         headerRight: (
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { searchVisible = !searchVisible; navigation.setParams({ search: searchVisible }) }}>
-              <Icon name='search' style={{color: '#556474'}} size={24} />
+              <Icon name='plus' style={{ color: '#556474' }} size={24} />
+            </TouchableOpacity>
+            <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { searchVisible = !searchVisible; navigation.setParams({ search: searchVisible }) }}>
+              <Icon name='search' style={{ color: '#556474' }} size={24} />
             </TouchableOpacity>
           </View>
         ),
@@ -55,8 +58,14 @@ export default createAppContainer(
         // },
         headerRight: (
           <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { trashVisible ? navigation.setParams({ delete: trashVisible }) : null; trashVisible = !trashVisible; navigation.setParams({ trash: trashVisible }); }}>
+              {trashVisible ?
+                <Icon name='check' style={{ color: '#a84c42' }} size={24} /> :
+                <Icon name='trash' style={{ color: '#556474' }} size={24} />
+              }
+            </TouchableOpacity>
             <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { editVisible = !editVisible; navigation.setParams({ edit: editVisible }) }}>
-              <Icon name='pen' style={{color: '#556474'}} size={24} />
+              <Icon name='pen' style={{ color: '#556474' }} size={24} />
             </TouchableOpacity>
           </View>
         ),
