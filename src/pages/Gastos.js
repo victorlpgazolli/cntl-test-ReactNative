@@ -1,16 +1,31 @@
 
-import React from 'react';
-import { Dimensions, Platform, StyleSheet, View, ScrollView, Text, TouchableWithoutFeedback, ToastAndroid, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Platform, StyleSheet, View, ScrollView, Text, Image, ToastAndroid, TouchableOpacity } from 'react-native'
+import Icon_FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Icon_material from 'react-native-vector-icons/MaterialCommunityIcons';
 import Expenses from '../assets/generate_gastos'
 import { Footer, Header } from 'native-base';
 const _width = Dimensions.get('window').width
 const _height = Dimensions.get('window').height
 export default function Gastos({ navigation }) {
+    const [exprense, setExprense] = useState([]);
+    const [total, setTotal] = useState(0);
+    useEffect(() => {
+        setExprense(Expenses)
+        let soma_total = 0;
+        for (var i = 0; i < exprense.length; i++) {
+            for (var j = 0; j < exprense[i].expenses.length; j++) {
+                soma_total += parseInt(exprense[i].expenses[j].price)
+            }
+        }
+        setTotal(soma_total)
+    }, []);
+
     return (
         <View style={{ flex: 1 }}>
-            <Header androidStatusBarColor="#9DADB8" style={{display:'none'}}/>
+            <Header androidStatusBarColor="#9DADB8" style={{ display: 'none' }} />
             <ScrollView contentContainerStyle={[styles.container]} style={[styles.containerShadow]}>
-                {Expenses.map(expense => {
+                {exprense.map(expense => {
                     return (
                         <View style={[{ width: _width, marginBottom: 15 }]}>
                             <Text style={[styles.dateStyle, styles.bolder]}>{expense.date} <Text style={[styles.dayStyle]}>{expense.day.toUpperCase()}</Text></Text>
@@ -18,18 +33,26 @@ export default function Gastos({ navigation }) {
                                 expense.expenses.map(indiv_expense =>
                                     <TouchableOpacity
                                         style={[{ alignItems: "center" }]}
-                                        onPress={()=>{ navigation.navigate('Indiv_gastos', {expense: indiv_expense, day: expense.date});}} >
-                                        <View style={[styles.ticket, styles.shadow, { flexDirection: 'row', }]}>
+                                        onPress={() => { navigation.navigate('Indiv_gastos', { expense: indiv_expense, day: expense.date }); }} >
+                                        <View style={[styles.ticket, styles.shadow, { flexDirection: 'row' }]}>
                                             <View style={[{ flex: 1, width: _width / 2 }]}>
-                                                <Text style={[{ fontSize: 18 }]}>{indiv_expense.title}</Text>
-                                                <View>
+                                                <Text style={[{ fontSize: 18, opacity: indiv_expense.active ? 1 : 0.5, textDecorationLine: indiv_expense.active ? '' : 'line-through' }, styles.isActive]}>{indiv_expense.title}</Text>
+                                                <View style={[{ flexDirection: 'row' }]}>
+                                                    <Icon_material name='silverware-fork-knife' style={[styles.icons, { marginRight: 7, opacity: indiv_expense.active ? 1 : 0.5, }]} size={17} />
                                                     <Text style={[{ color: '#9DADB8', fontWeight: '900' }]}>{indiv_expense.category}</Text>
                                                 </View>
                                             </View>
                                             <View style={[{ flex: 1, width: _width / 2, justifyContent: 'center', alignItems: 'flex-end', }]}>
                                                 <View style={[{ flexDirection: 'row' }]}>
-                                                    <Text style={[styles.bolder, { fontSize: 18, paddingHorizontal: 5 }]}>ic</Text>
-                                                    <Text style={[styles.bolder, { fontSize: 18 }]}>{indiv_expense.price}</Text>
+                                                    {
+                                                        indiv_expense.refundable ? <Image
+                                                            style={[{ width: 24, height: 24, marginRight: 10, opacity: indiv_expense.active ? 1 : 0.5 }]}
+                                                            source={require('../assets/refundable.png')}
+                                                            tintColor={indiv_expense.active ? '#92DD59' : 'gray'}
+                                                        /> : null
+                                                    }
+
+                                                    <Text style={[styles.bolder, { fontSize: 18, opacity: indiv_expense.active ? 1 : 0.5, textDecorationLine: indiv_expense.active ? '' : 'line-through' }, styles.isActive]}>{indiv_expense.price}</Text>
                                                 </View>
                                             </View>
                                         </View>
@@ -44,10 +67,10 @@ export default function Gastos({ navigation }) {
                     <Text style={[{ opacity: 0.8, color: '#9DADB8', paddingVertical: 2, fontSize: 18 }, styles.bolder]}>TOTAL</Text>
                 </View>
                 <View style={[styles.floatCenter]}>
-                    <Text style={[{ textAlign: 'right', color: '#0E3A57' }, styles.bolder,]}>R$<Text style={[{ fontSize: 25, }]}> 490,00</Text></Text>
+                    <Text style={[{ textAlign: 'right', color: '#0E3A57' }, styles.bolder,]}>R$<Text style={[{ fontSize: 25, }]}> {total}</Text></Text>
                 </View>
             </Footer>
-        </View>
+        </View >
     );
 };
 
@@ -56,6 +79,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 30,
         backgroundColor: '#F5F8FB',
+    },
+    isActive: {
+        textDecorationStyle: 'solid',
+        textDecorationColor: "#000"
     },
     dateStyle: {
         marginLeft: 10,
@@ -101,5 +128,9 @@ const styles = StyleSheet.create({
     },
     bolder: {
         fontWeight: 'bold'
+    },
+    icons: {
+        color: '#9DADB8',
+        marginRight: 7,
     },
 })
