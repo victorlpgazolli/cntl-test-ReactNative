@@ -1,4 +1,3 @@
-var d = new Date();
 const data = [
     {
         date: '22',
@@ -7,6 +6,8 @@ const data = [
             {
                 title: 'Almoço restaurante',
                 category: 'Alimentação',
+                place: 'Contele Filial de Santos - SP',
+                image: require('../assets/img_gasto.png'),
                 price: '26,00',
                 active: true,
                 refundable: true,
@@ -14,6 +15,8 @@ const data = [
             {
                 title: 'Almoço restaurante',
                 category: 'Alimentação',
+                place: 'Contele Filial de Santos - SP',
+                image: require('../assets/img_gasto.png'),
                 price: '326,00',
                 active: true,
                 refundable: true,
@@ -27,13 +30,17 @@ const data = [
             {
                 title: 'Almoço restaurante',
                 category: 'Alimentação',
+                place: 'Contele Filial de Santos - SP',
+                image: require('../assets/img_gasto.png'),
                 price: '26,00',
                 active: false,
-                refundable: false,
+                refundable: true,
             },
             {
                 title: 'Almoço restaurante',
                 category: 'Alimentação',
+                place: 'Contele Filial de Santos - SP',
+                image: require('../assets/img_gasto.png'),
                 price: '26,00',
                 active: true,
                 refundable: true,
@@ -47,6 +54,8 @@ const data = [
             {
                 title: 'Almoço restaurante',
                 category: 'Alimentação',
+                place: 'Contele Filial de Santos - SP',
+                image: require('../assets/img_gasto.png'),
                 price: '26,00',
                 active: true,
                 refundable: false,
