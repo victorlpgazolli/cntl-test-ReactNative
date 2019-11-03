@@ -34,7 +34,7 @@ export default createAppContainer(
         headerRight: (
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { searchVisible = !searchVisible; navigation.setParams({ search: searchVisible }) }}>
-              <Icon name='search' size={24} />
+              <Icon name='search' style={{color: '#556474'}} size={24} />
             </TouchableOpacity>
           </View>
         ),
@@ -48,7 +48,7 @@ export default createAppContainer(
           elevation: 0,
           shadowOpacity: 0,
         },
-        // headerTintColor: '#556474',
+        headerTintColor: '#556474',
         // headerTitleStyle: {
         //   fontSize: 29,
         //   fontWeight: 'bold',
@@ -56,7 +56,7 @@ export default createAppContainer(
         headerRight: (
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { editVisible = !editVisible; navigation.setParams({ edit: editVisible }) }}>
-              <Icon name='pen' size={24} />
+              <Icon name='pen' style={{color: '#556474'}} size={24} />
             </TouchableOpacity>
           </View>
         ),
