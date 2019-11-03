@@ -18,54 +18,107 @@ export default function Gastos({ navigation }) {
 
     <View>
       <Header style={[{ backgroundColor: '#DBE4F0', height: _height * 0.12 }]} androidStatusBarColor='#9DADB8'>
+
         <View style={[{ width: _width, flexDirection: 'row', marginRight: 30, justifyContent: 'flex-end' }]}>
-          <Text style={[styles.bolder, { fontSize: 20, paddingTop: 10, color: '#556474' }]}>R$ </Text>
-          <Text style={[styles.bolder, { fontSize: 42, color: '#556474' }]}>{exprense.price}</Text>
+
+          <Text style={[styles.bolder, { fontSize: 20, paddingTop: 10, color: '#556474' }]}>
+            R$
+          </Text>
+
+          <Text style={[styles.bolder, { fontSize: 42, color: '#556474' }]}>
+            {exprense.price}
+          </Text>
+
         </View>
+
       </Header>
+
       <ScrollView contentContainerStyle={[styles.container]} >
+
         <View style={[{ flexDirection: 'row', marginBottom: 30 }]}>
+
           <Icon_FontAwesome name='calendar-o' style={[styles.icons]} size={24} />
-          <Text style={[styles.bolder, { fontSize: 18, color: '#556474' }]}> {day.substring(0, 10)}</Text>
+
+          <Text style={[styles.bolder, { fontSize: 18, color: '#556474' }]}>
+            {day.substring(0, 10)}
+          </Text>
+
         </View>
+
         <View style={[styles.info]}>
-          <Text style={[styles.bolder], { fontSize: 22 }}>{exprense.title}</Text>
+
+          <Text style={[styles.bolder], { fontSize: 22 }}>
+            {exprense.title}
+          </Text>
+
           <View style={[{ flexDirection: 'row', marginTop: 4 }]}>
+
             <Icon_material name='silverware-fork-knife' style={[styles.icons]} size={20} />
-            <Text style={[{ fontSize: 15, color: '#556474' }]}>{exprense.category}</Text>
+
+            <Text style={[{ fontSize: 15, color: '#556474' }]}>
+              {exprense.category}
+            </Text>
+
           </View>
+
         </View>
+
         {
-          exprense.refundable ?  <View style={[styles.info]}>
-          <View style={[{ flexDirection: 'row', alignItems: 'center'  }]}>
-            <Image
-              style={[{ width: 24, height: 24, marginRight: 10 }]}
-              source={require('../assets/refundable.png')}
-            />
-            <Text style={[styles.bolder, { fontSize: 22, color: '#92DD59' }]}>Reembolsável</Text>
+          exprense.refundable ? <View style={[styles.info]}>
+
+            <View style={[{ flexDirection: 'row', alignItems: 'center' }]}>
+
+              <Image
+                style={[{ width: 24, height: 24, marginRight: 10 }]}
+                source={require('../assets/refundable.png')}
+              />
+
+              <Text style={[styles.bolder, { fontSize: 22, color: '#92DD59' }]}>
+                Reembolsável</Text>
+
+            </View>
+
           </View>
-        </View> : null
+            : null
         }
-       
+
         <View style={[styles.info]}>
+
           <View style={[styles.ticket, { flexDirection: 'row', alignItems: 'center' }]}>
 
+
             <Icon_FontAwesome name='calendar-check-o' style={[styles.icons, { paddingHorizontal: 7 }]} size={24} />
+
             <View style={[]}>
-              <Text style={[styles.bolder, { fontSize: 18, color: '#0E3A57' }]}>{exprense.place}</Text>
-              <Text style={[{ fontSize: 12, color: '#556474' }]}>{day}</Text>
+
+              <Text style={[styles.bolder, { fontSize: 18, color: '#0E3A57' }]}>
+                {exprense.place}
+              </Text>
+
+              <Text style={[{ fontSize: 12, color: '#556474' }]}>
+                {day}
+              </Text>
+
             </View>
+
           </View>
+
         </View>
+
         <View style={[styles.info]}>
+
           <Image
             style={styles.images}
             source={exprense.image}
             resizeMode='cover'
           />
+
         </View>
+
       </ScrollView>
+
     </View>
+
   )
 
 };
