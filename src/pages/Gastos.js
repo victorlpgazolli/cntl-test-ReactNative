@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, Platform, StyleSheet, View, ScrollView, Text, Image, ToastAndroid, TouchableOpacity } from 'react-native'
 import Icon_FontAwesome from 'react-native-vector-icons/FontAwesome';
+import PTRView from 'react-native-pull-to-refresh';
 import Icon_material from 'react-native-vector-icons/MaterialCommunityIcons';
 import SearchInput, { createFilter } from 'react-native-search-filter'
 import Expenses from '../assets/generate_gastos'
@@ -22,78 +23,85 @@ export default function Gastos({ navigation }) {
             }
         }
         setTotal(soma_total)
-    }, [total]);
+    }, [exprense]);
     function searchUpdated(term) {
         updateiTerm(term)
+    }
+    function refresh() {
+        return new Promise((resolve) => {
+            setTimeout(() => { resolve(); }, 2000)
+        });
     }
     searchTerms = navigation.getParam('search', false)
     const filteredExpenses = exprense.filter(createFilter(term, KEYS_TO_FILTERS))
     return (
         <View style={{ flex: 1 }}>
-            <Header androidStatusBarColor="#9DADB8" style={{ display: 'none' }} />
-            {
-                searchTerms ?
-                    <SearchInput
-                        onChangeText={(term) => { searchUpdated(term) }}
-                        style={[styles.searchInput]}
-                        placeholder="Pesquisar por nome"
-                    /> : null
-            }
-            <ScrollView contentContainerStyle={[styles.container]} style={[styles.containerShadow]}>
-                {filteredExpenses.map(expense => {
-                    return (
-                        <View style={[{ width: _width, marginBottom: 15 }]}>
-                            <Text style={[styles.dateStyle, styles.bolder]}>{expense.date} <Text style={[styles.dayStyle]}>{expense.day.toUpperCase()}</Text></Text>
-                            {
-                                expense.expenses.map(indiv_expense =>
+            <PTRView onRefresh={refresh} >
+                <Header androidStatusBarColor="#9DADB8" style={{ display: 'none' }} />
+                {
+                    searchTerms ?
+                        <SearchInput
+                            onChangeText={(term) => { searchUpdated(term) }}
+                            style={[styles.searchInput]}
+                            placeholder="Pesquisar por nome"
+                        /> : null
+                }
+                <ScrollView contentContainerStyle={[styles.container]} style={[styles.containerShadow]}>
+                    {filteredExpenses.map(expense => {
+                        return (
+                            <View style={[{ width: _width, marginBottom: 15 }]}>
+                                <Text style={[styles.dateStyle, styles.bolder]}>{expense.date} <Text style={[styles.dayStyle]}>{expense.day.toUpperCase()}</Text></Text>
+                                {
+                                    expense.expenses.map(indiv_expense =>
 
-                                    <TouchableOpacity
-                                        style={[{ alignItems: "center" }]}
-                                        onPress={() => { navigation.navigate('Indiv_gastos', { expense: indiv_expense, day: expense.date }); }} >
+                                        <TouchableOpacity
+                                            style={[{ alignItems: "center" }]}
+                                            onPress={() => { navigation.navigate('Indiv_gastos', { expense: indiv_expense, day: expense.date }); }} >
 
-                                        <View style={[styles.ticket, styles.shadow, { flexDirection: 'row' }]}>
+                                            <View style={[styles.ticket, styles.shadow, { flexDirection: 'row' }]}>
 
-                                            <View style={[{ flex: 1, width: _width / 2 }]}>
+                                                <View style={[{ flex: 1, width: _width / 2 }]}>
 
-                                                <Text style={[{ fontSize: 18, opacity: indiv_expense.active ? 1 : 0.5, textDecorationLine: indiv_expense.active ? '' : 'line-through' }, styles.isActive]}>
-                                                    {indiv_expense.title}
-                                                </Text>
-
-                                                <View style={[{ flexDirection: 'row' }]}>
-
-                                                    <Icon_material name='silverware-fork-knife' style={[styles.icons, { marginRight: 7, opacity: indiv_expense.active ? 1 : 0.5, }]} size={17} />
-
-                                                    <Text style={[{ color: '#9DADB8', fontWeight: '900' }]}>
-                                                        {indiv_expense.category}
+                                                    <Text style={[{ fontSize: 18, opacity: indiv_expense.active ? 1 : 0.5, textDecorationLine: indiv_expense.active ? '' : 'line-through' }, styles.isActive]}>
+                                                        {indiv_expense.title}
                                                     </Text>
 
+                                                    <View style={[{ flexDirection: 'row' }]}>
+
+                                                        <Icon_material name='silverware-fork-knife' style={[styles.icons, { marginRight: 7, opacity: indiv_expense.active ? 1 : 0.5, }]} size={17} />
+
+                                                        <Text style={[{ color: '#9DADB8', fontWeight: '900' }]}>
+                                                            {indiv_expense.category}
+                                                        </Text>
+
+                                                    </View>
+                                                </View>
+                                                <View style={[{ flex: 1, width: _width / 2, justifyContent: 'center', alignItems: 'flex-end', }]}>
+
+                                                    <View style={[{ flexDirection: 'row' }]}>
+                                                        {
+                                                            indiv_expense.refundable ?
+                                                                <Image
+                                                                    style={[{ width: 24, height: 24, marginRight: 10, opacity: indiv_expense.active ? 1 : 0.5 }]}
+                                                                    source={require('../assets/refundable.png')}
+                                                                    tintColor={indiv_expense.active ? '#92DD59' : 'gray'}
+                                                                /> : null
+                                                        }
+
+                                                        <Text style={[styles.bolder,
+                                                        { fontSize: 18, opacity: indiv_expense.active ? 1 : 0.5, textDecorationLine: indiv_expense.active ? '' : 'line-through' }, styles.isActive]}>
+                                                            {indiv_expense.price}
+                                                        </Text>
+                                                    </View>
                                                 </View>
                                             </View>
-                                            <View style={[{ flex: 1, width: _width / 2, justifyContent: 'center', alignItems: 'flex-end', }]}>
-
-                                                <View style={[{ flexDirection: 'row' }]}>
-                                                    {
-                                                        indiv_expense.refundable ?
-                                                            <Image
-                                                                style={[{ width: 24, height: 24, marginRight: 10, opacity: indiv_expense.active ? 1 : 0.5 }]}
-                                                                source={require('../assets/refundable.png')}
-                                                                tintColor={indiv_expense.active ? '#92DD59' : 'gray'}
-                                                            /> : null
-                                                    }
-
-                                                    <Text style={[styles.bolder,
-                                                    { fontSize: 18, opacity: indiv_expense.active ? 1 : 0.5, textDecorationLine: indiv_expense.active ? '' : 'line-through' }, styles.isActive]}>
-                                                        {indiv_expense.price}
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity>)
-                            }
-                        </View>
-                    )
-                })}
-            </ScrollView>
+                                        </TouchableOpacity>)
+                                }
+                            </View>
+                        )
+                    })}
+                </ScrollView>
+            </PTRView>
             <Footer style={[{ backgroundColor: '#DBE4F0', height: _height * 0.2 }]}>
 
                 <View style={[styles.floatCenter]}>
@@ -106,9 +114,9 @@ export default function Gastos({ navigation }) {
                 <View style={[styles.floatCenter]}>
 
                     <Text style={[{ textAlign: 'right', color: '#0E3A57' }, styles.bolder,]}>
-                        R$ 
+                        R$
                         <Text style={[{ fontSize: 25, }]}>
-                             {total}
+                            {total}
                         </Text>
 
                     </Text>
@@ -183,8 +191,8 @@ const styles = StyleSheet.create({
     searchInput: {
         padding: 10,
         borderColor: '#CCCCCC00',
-        borderBottomColor : '#CCCCCC90',
+        borderBottomColor: '#CCCCCC90',
         borderWidth: 1,
         backgroundColor: '#F5F8FB'
-      },
+    },
 })
