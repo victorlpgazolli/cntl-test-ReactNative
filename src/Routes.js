@@ -19,7 +19,7 @@ export default createAppContainer(
   createStackNavigator({
     Gastos: {
       screen: Gastos,
-      navigationOptions: () => ({
+      navigationOptions: ({ navigation }) => ({
         title: 'Setembro',
         headerStyle: {
           backgroundColor: '#F5F8FB',
@@ -42,7 +42,7 @@ export default createAppContainer(
     },
     Indiv_gastos: {
       screen: Indiv_gastos,
-      navigationOptions: () => ({
+      navigationOptions: ({ navigation }) => ({
         headerStyle: {
           backgroundColor: '#DBE4F0',
           elevation: 0,
