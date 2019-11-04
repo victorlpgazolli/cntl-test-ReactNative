@@ -4,7 +4,15 @@
 Este projeto é um layout de um aplicativo para reembolso de despesas.
 
 No app terá todas as suas despesas, contendo várias informações como: 
-Data de inserção _(exemplo: 22/09/2019)_, nome _(exemplo: Almoço)_, valor _(exemplo: R$26,00)_, a categoria _(exemplo: Alimentação)_, o local de origem _(exemplo: Contele filial)_, uma imagem _(exemplo: recibo)_, se essa despeza é reembolsável ou não e também ela estará riscada caso já tenha sido reembolsada pelo empregador.
+
+- Data de inserção _(exemplo: 22/09/2019)_
+- Nome _(exemplo: Almoço)_
+- Valor _(exemplo: R$26,00)_
+- Categoria _(exemplo: Alimentação)_
+- Local de origem _(exemplo: Contele filial)_
+- Imagem _(exemplo: recibo)_
+- Despeza é reembolsável ou não. _(determinado pelo icone verde ao lado do valor)_,
+- Reembolsada (ou não) pelo empregador _(a despesa já foi reembolsada pelo empregador caso esteja riscada)_
 
 
 ### Telas:
