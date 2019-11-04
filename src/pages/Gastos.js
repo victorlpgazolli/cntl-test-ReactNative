@@ -50,7 +50,7 @@ export default function Gastos({ navigation }) {
                     {filteredExpenses.map(expense => {
                         return (
                             <View style={[{ width: _width, marginBottom: 15 }]}>
-                                <Text style={[styles.dateStyle, styles.bolder]}>{expense.date} <Text style={[styles.dayStyle]}>{expense.day.toUpperCase()}</Text></Text>
+                                <Text style={[styles.dateStyle, styles.bolder]}>{expense.date.substring(0,2)} <Text style={[styles.dayStyle]}>{expense.day.toUpperCase()}</Text></Text>
                                 {
                                     expense.expenses.map(indiv_expense =>
 
@@ -118,7 +118,7 @@ export default function Gastos({ navigation }) {
                             R$
                         </Text>
                         <Text style={[{ fontSize: 37, }, styles.bolder, styles.darkerBlue]}>
-                            {total.toFixed(2)}
+                            {total.toFixed(2).replace('.', ',')}
                         </Text>
                     </View>
 
