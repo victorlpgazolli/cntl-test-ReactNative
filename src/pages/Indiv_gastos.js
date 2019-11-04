@@ -6,22 +6,15 @@ import Icon_material from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Footer, Header } from 'native-base';
 const _width = Dimensions.get('window').width
 const _height = Dimensions.get('window').height
-var day = '', trashVisible = false, deleteChecked = false;
+var date = '';
 export default function Gastos({ navigation }) {
   const [exprense, setExprense] = useState([]);
   useEffect(() => {
-    day = `${navigation.state.params.day}/09/2019 - 13h50`
+    const {day: _date} = navigation.state.params
+    date = _date
     setExprense(navigation.state.params.expense)
   }, []);
-  trashVisible = navigation.getParam('trash', false)
-  deleteChecked = navigation.getParam('delete', false)
-  if (trashVisible) {
-    ToastAndroid.show("Clique novamente para confirmar", ToastAndroid.SHORT);
-  }
-  if (deleteChecked) {
-    ToastAndroid.show("Apagado", ToastAndroid.SHORT);
-    navigation.navigate('Gastos')
-  }
+
   return (
 
     <View>
@@ -48,7 +41,7 @@ export default function Gastos({ navigation }) {
           <Icon_FontAwesome name='calendar-o' style={[styles.icons]} size={24} />
 
           <Text style={[styles.bolder, { fontSize: 18, color: '#556474' }]}>
-            {day.substring(0, 10)}
+            {date.substring(0, 10)}
           </Text>
 
         </View>
@@ -104,7 +97,7 @@ export default function Gastos({ navigation }) {
               </Text>
 
               <Text style={[{ fontSize: 12, color: '#556474' }]}>
-                {day}
+                {date} - {exprense.hour}
               </Text>
 
             </View>

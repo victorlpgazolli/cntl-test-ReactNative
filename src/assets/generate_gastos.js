@@ -1,6 +1,6 @@
 const data = [
     {
-        date: '22',
+        date: '22/09/2019',
         day: 'sexta',
         expenses:[
             {
@@ -8,6 +8,7 @@ const data = [
                 category: 'Alimentação',
                 place: 'Contele Filial de Santos - SP',
                 image: require('../assets/img_gasto.png'),
+                hour: '13h50',
                 price: '26,00',
                 active: true,
                 refundable: true,
@@ -17,6 +18,7 @@ const data = [
                 category: 'Alimentação',
                 place: 'Contele Filial de Santos - SP',
                 image: require('../assets/img_gasto.png'),
+                hour: '13h50',
                 price: '326,00',
                 active: true,
                 refundable: true,
@@ -24,7 +26,7 @@ const data = [
         ]
     },
     {
-        date: '20',
+        date: '20/09/2019',
         day: 'quarta',
         expenses:[
             {
@@ -32,6 +34,7 @@ const data = [
                 category: 'Alimentação',
                 place: 'Contele Filial de Santos - SP',
                 image: require('../assets/img_gasto.png'),
+                hour: '13h50',
                 price: '26,00',
                 active: false,
                 refundable: true,
@@ -41,6 +44,7 @@ const data = [
                 category: 'Alimentação',
                 place: 'Contele Filial de Santos - SP',
                 image: require('../assets/img_gasto.png'),
+                hour: '13h50',
                 price: '26,00',
                 active: true,
                 refundable: true,
@@ -48,7 +52,7 @@ const data = [
         ]
     },
     {
-        date: '14',
+        date: '14/09/2019',
         day: 'segunda',
         expenses:[
             {
@@ -56,6 +60,7 @@ const data = [
                 category: 'Alimentação',
                 place: 'Contele Filial de Santos - SP',
                 image: require('../assets/img_gasto.png'),
+                hour: '13h50',
                 price: '26,00',
                 active: true,
                 refundable: false,
