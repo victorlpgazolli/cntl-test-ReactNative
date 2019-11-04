@@ -19,7 +19,7 @@ export default function Gastos({ navigation }) {
         let soma_total = 0;
         for (var i = 0; i < exprense.length; i++) {
             for (var j = 0; j < exprense[i].expenses.length; j++) {
-                soma_total += parseInt(exprense[i].expenses[j].price)
+                soma_total += parseFloat(exprense[i].expenses[j].price)
             }
         }
         setTotal(soma_total)
@@ -76,7 +76,7 @@ export default function Gastos({ navigation }) {
 
                                                     </View>
                                                 </View>
-                                                <View style={[{ flex: 1, width: _width / 2, justifyContent: 'center', alignItems: 'flex-end', }]}>
+                                                <View style={[styles.price_refundable]}>
 
                                                     <View style={[{ flexDirection: 'row' }]}>
                                                         {
@@ -106,20 +106,21 @@ export default function Gastos({ navigation }) {
 
                 <View style={[styles.floatCenter]}>
 
-                    <Text style={[{ opacity: 0.8, color: '#9DADB8', paddingVertical: 2, fontSize: 18 }, styles.bolder]}>
+                    <Text style={[styles.total_text, styles.bolder]}>
                         TOTAL
                     </Text>
 
                 </View>
-                <View style={[styles.floatCenter]}>
+                <View style={[styles.floatCenter, { alignItems: 'flex-end' }]}>
+                    <View style={[{ flexDirection: 'row', alignItems: 'flex-end' }]}>
 
-                    <Text style={[{ textAlign: 'right', color: '#0E3A57' }, styles.bolder,]}>
-                        R$
-                        <Text style={[{ fontSize: 25, }]}>
-                            {total}
+                        <Text style={[{ fontSize: 20, marginRight: 5 }, styles.bolder, styles.darkerBlue]}>
+                            R$
                         </Text>
-
-                    </Text>
+                        <Text style={[{ fontSize: 37, }, styles.bolder, styles.darkerBlue]}>
+                            {total.toFixed(2)}
+                        </Text>
+                    </View>
 
                 </View>
 
@@ -134,6 +135,21 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 15,
         backgroundColor: '#F5F8FB',
+    },
+    darkerBlue: {
+        color: '#0E3A57',
+    },
+    total_text: {
+        opacity: 0.9,
+        color: '#9DADB8',
+        paddingVertical: 10,
+        fontSize: 20
+    },
+    price_refundable: {
+        flex: 1,
+        width: _width / 2,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
     },
     isActive: {
         textDecorationStyle: 'solid',
