@@ -17,3 +17,8 @@ No app terá todas as suas despesas, contendo várias informações como:
 
 ### Telas:
 ![cntl-test-image](https://user-images.githubusercontent.com/50163396/68165113-4a879c00-ff3d-11e9-8611-c1db75fb1bc2.png)
+
+### Extensão:
+Baseado no layout apresentado, foi feito o layout de uma tela de visão geral, onde terá informações de gastos e de quantidade de despesas mensais.
+
+![visao-geral](https://user-images.githubusercontent.com/50163396/68166290-ad2e6700-ff40-11e9-83e7-951c58aa9a47.png)
