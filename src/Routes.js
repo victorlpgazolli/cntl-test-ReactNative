@@ -1,10 +1,9 @@
 
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import Gastos from './pages/Gastos'
-import Indiv_gastos from './pages/Indiv_gastos'
+import Gastos from './pages/gastos'
+import HeaderButton from './components/headerButton'
+import gastoIndividual from './pages/gastoIndividual'
 const tabBarOptions = {
   activeTintColor: 'tomato',
   inactiveTintColor: 'gray',
@@ -14,7 +13,6 @@ const tabBarOptions = {
     fontSize: 20,
   },
 }
-var searchVisible = false, editVisible = false;
 export default createAppContainer(
   createStackNavigator({
     Gastos: {
@@ -32,16 +30,12 @@ export default createAppContainer(
           fontWeight: 'bold',
         },
         headerRight: (
-          <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { searchVisible = !searchVisible; navigation.setParams({ search: searchVisible }) }}>
-              <Icon name='search' style={{ color: '#556474' }} size={24} />
-            </TouchableOpacity>
-          </View>
+          <HeaderButton screenProps={{ icon: 'search' }} />
         ),
       }),
     },
-    Indiv_gastos: {
-      screen: Indiv_gastos,
+    gastoIndividual: {
+      screen: gastoIndividual,
       navigationOptions: ({ navigation }) => ({
         headerStyle: {
           backgroundColor: '#DBE4F0',
@@ -49,16 +43,8 @@ export default createAppContainer(
           shadowOpacity: 0,
         },
         headerTintColor: '#556474',
-        // headerTitleStyle: {
-        //   fontSize: 29,
-        //   fontWeight: 'bold',
-        // },
         headerRight: (
-          <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { editVisible = !editVisible; navigation.setParams({ edit: editVisible }) }}>
-              <Icon name='pen' style={{ color: '#556474' }} size={24} />
-            </TouchableOpacity>
-          </View>
+          <HeaderButton screenProps={{ icon: 'pen' }} />
         ),
       }),
     },
