@@ -4,13 +4,12 @@ import { Dimensions, Platform, StyleSheet, View, ScrollView, Text, Image, ToastA
 import Icon_FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon_material from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Footer, Header } from 'native-base';
-const _width = Dimensions.get('window').width
-const _height = Dimensions.get('window').height
+const { width, height } = Dimensions.get('window')
 var date = '';
 export default function Gastos({ navigation }) {
   const [exprense, setExprense] = useState([]);
   useEffect(() => {
-    const {day: _date} = navigation.state.params
+    const { day: _date } = navigation.state.params
     date = _date
     setExprense(navigation.state.params.expense)
   }, []);
@@ -18,9 +17,9 @@ export default function Gastos({ navigation }) {
   return (
 
     <View>
-      <Header style={[{ backgroundColor: '#DBE4F0', height: _height * 0.12 }]} androidStatusBarColor='#9DADB8'>
+      <Header style={[{ backgroundColor: '#DBE4F0', height: height * 0.12 }]} androidStatusBarColor='#9DADB8'>
 
-        <View style={[{ width: _width, flexDirection: 'row', marginRight: 30, justifyContent: 'flex-end' }]}>
+        <View style={[{ width: width, flexDirection: 'row', marginRight: 30, justifyContent: 'flex-end' }]}>
 
           <Text style={[styles.bolder, { fontSize: 20, paddingTop: 10, color: '#556474' }]}>
             R$
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 25,
     backgroundColor: '#F5F8FB',
-    height: _height,
+    height: height,
   },
   dateStyle: {
     marginLeft: 10,
@@ -186,7 +185,7 @@ const styles = StyleSheet.create({
   },
   images: {
     height: 150,
-    width: _width - 50,
+    width: width - 50,
     borderRadius: 10
   },
 })
