@@ -7,8 +7,7 @@ import Icon_material from 'react-native-vector-icons/MaterialCommunityIcons';
 import SearchInput, { createFilter } from 'react-native-search-filter'
 import Expenses from '../assets/generate_gastos'
 import { Footer, Header } from 'native-base';
-const _width = Dimensions.get('window').width
-const _height = Dimensions.get('window').height
+const { width, height } = Dimensions.get('window')
 const KEYS_TO_FILTERS = ['expenses.title', 'title'];
 export default function Gastos({ navigation }) {
     const [exprense, setExprense] = useState([]);
@@ -17,8 +16,8 @@ export default function Gastos({ navigation }) {
     useEffect(() => {
         setExprense(Expenses)
         let soma_total = 0;
-        for (var i = 0; i < exprense.length; i++) {
-            for (var j = 0; j < exprense[i].expenses.length; j++) {
+        for (let i = 0; i < exprense.length; i++) {
+            for (let j = 0; j < exprense[i].expenses.length; j++) {
                 soma_total += parseFloat(exprense[i].expenses[j].price)
             }
         }
@@ -49,29 +48,29 @@ export default function Gastos({ navigation }) {
                 <ScrollView contentContainerStyle={[styles.container]} style={[styles.containerShadow]}>
                     {filteredExpenses.map(expense => {
                         return (
-                            <View style={[{ width: _width, marginBottom: 15 }]}>
-                                <Text style={[styles.dateStyle, styles.bolder]}>{expense.date.substring(0,2)} <Text style={[styles.dayStyle]}>{expense.day.toUpperCase()}</Text></Text>
+                            <View style={[{ width: width, marginBottom: 15 }]}>
+                                <Text style={[styles.dateStyle, styles.bolder]}>{expense.date.substring(0, 2)} <Text style={[styles.dayStyle]}>{expense.day.toUpperCase()}</Text></Text>
                                 {
-                                    expense.expenses.map(indiv_expense =>
+                                    expense.expenses.map(expenseIndividual =>
 
                                         <TouchableOpacity
                                             style={[{ alignItems: "center" }]}
-                                            onPress={() => { navigation.navigate('Indiv_gastos', { expense: indiv_expense, day: expense.date }); }} >
+                                            onPress={() => { navigation.navigate('gastoIndividual', { expense: expenseIndividual, day: expense.date }); }} >
 
                                             <View style={[styles.ticket, styles.shadow, { flexDirection: 'row' }]}>
 
-                                                <View style={[{ flex: 1, width: _width / 2 }]}>
+                                                <View style={[{ flex: 1, width: width / 2 }]}>
 
-                                                    <Text style={[{ fontSize: 18, opacity: indiv_expense.active ? 1 : 0.5, textDecorationLine: indiv_expense.active ? '' : 'line-through' }, styles.isActive]}>
-                                                        {indiv_expense.title}
+                                                    <Text style={[{ fontSize: 18, opacity: expenseIndividual.active ? 1 : 0.5, textDecorationLine: expenseIndividual.active ? '' : 'line-through' }, styles.isActive]}>
+                                                        {expenseIndividual.title}
                                                     </Text>
 
                                                     <View style={[{ flexDirection: 'row' }]}>
 
-                                                        <Icon_material name='silverware-fork-knife' style={[styles.icons, { marginRight: 7, opacity: indiv_expense.active ? 1 : 0.5, }]} size={17} />
+                                                        <Icon_material name='silverware-fork-knife' style={[styles.icons, { marginRight: 7, opacity: expenseIndividual.active ? 1 : 0.5, }]} size={17} />
 
                                                         <Text style={[{ color: '#9DADB8', fontWeight: '900' }]}>
-                                                            {indiv_expense.category}
+                                                            {expenseIndividual.category}
                                                         </Text>
 
                                                     </View>
@@ -80,17 +79,17 @@ export default function Gastos({ navigation }) {
 
                                                     <View style={[{ flexDirection: 'row' }]}>
                                                         {
-                                                            indiv_expense.refundable ?
+                                                            expenseIndividual.refundable ?
                                                                 <Image
-                                                                    style={[{ width: 24, height: 24, marginRight: 10, opacity: indiv_expense.active ? 1 : 0.5 }]}
+                                                                    style={[{ width: 24, height: 24, marginRight: 10, opacity: expenseIndividual.active ? 1 : 0.5 }]}
                                                                     source={require('../assets/refundable.png')}
-                                                                    tintColor={indiv_expense.active ? '#92DD59' : 'gray'}
+                                                                    tintColor={expenseIndividual.active ? '#92DD59' : 'gray'}
                                                                 /> : null
                                                         }
 
                                                         <Text style={[styles.bolder,
-                                                        { fontSize: 18, opacity: indiv_expense.active ? 1 : 0.5, textDecorationLine: indiv_expense.active ? '' : 'line-through' }, styles.isActive]}>
-                                                            {indiv_expense.price}
+                                                        { fontSize: 18, opacity: expenseIndividual.active ? 1 : 0.5, textDecorationLine: expenseIndividual.active ? '' : 'line-through' }, styles.isActive]}>
+                                                            {expenseIndividual.price}
                                                         </Text>
                                                     </View>
                                                 </View>
@@ -102,7 +101,7 @@ export default function Gastos({ navigation }) {
                     })}
                 </ScrollView>
             </PTRView>
-            <Footer style={[{ backgroundColor: '#DBE4F0', height: _height * 0.2 }]}>
+            <Footer style={[{ backgroundColor: '#DBE4F0', height: height * 0.2 }]}>
 
                 <View style={[styles.floatCenter]}>
 
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
     },
     price_refundable: {
         flex: 1,
-        width: _width / 2,
+        width: width / 2,
         justifyContent: 'center',
         alignItems: 'flex-end',
     },
@@ -175,7 +174,7 @@ const styles = StyleSheet.create({
         marginVertical: 2,
         paddingHorizontal: 15,
         paddingVertical: 15,
-        width: _width
+        width: width
     },
     shadow: {
         shadowColor: "#000",
