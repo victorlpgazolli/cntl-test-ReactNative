@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { Dimensions, Platform, StyleSheet, View, ScrollView, Text, Image, ToastAndroid, TouchableOpacity } from 'react-native'
+import { Dimensions, StyleSheet, View, ScrollView, Text, Image } from 'react-native'
 import Icon_FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon_material from 'react-native-vector-icons/MaterialCommunityIcons';
+import customStyles from '../assets/styles';
 import { Footer, Header } from 'native-base';
 const { width, height } = Dimensions.get('window')
 var date = '';
@@ -17,15 +18,15 @@ export default function Gastos({ navigation }) {
   return (
 
     <View>
-      <Header style={[{ backgroundColor: '#DBE4F0', height: height * 0.12 }]} androidStatusBarColor='#9DADB8'>
+      <Header style={[{ backgroundColor: customStyles.lightGray, height: height * 0.12 }]} androidStatusBarColor={customStyles.darkGray}>
 
         <View style={[{ width: width, flexDirection: 'row', marginRight: 30, justifyContent: 'flex-end' }]}>
 
-          <Text style={[styles.bolder, { fontSize: 20, paddingTop: 10, color: '#556474' }]}>
+          <Text style={[customStyles.bolder, { fontSize: 20, paddingTop: 10, color: customStyles.darkGrayText }]}>
             R$
           </Text>
 
-          <Text style={[styles.bolder, { fontSize: 42, color: '#556474' }]}>
+          <Text style={[customStyles.bolder, { fontSize: 42, color: customStyles.darkGrayText }]}>
             {exprense.price}
           </Text>
 
@@ -39,7 +40,7 @@ export default function Gastos({ navigation }) {
 
           <Icon_FontAwesome name='calendar-o' style={[styles.icons]} size={24} />
 
-          <Text style={[styles.bolder, { fontSize: 18, color: '#556474' }]}>
+          <Text style={[customStyles.bolder, { fontSize: 18, color: customStyles.darkGrayText }]}>
             {date.substring(0, 10)}
           </Text>
 
@@ -47,7 +48,7 @@ export default function Gastos({ navigation }) {
 
         <View style={[styles.info]}>
 
-          <Text style={[styles.bolder], { fontSize: 22 }}>
+          <Text style={[customStyles.bolder], { fontSize: 22 }}>
             {exprense.title}
           </Text>
 
@@ -55,7 +56,7 @@ export default function Gastos({ navigation }) {
 
             <Icon_material name='silverware-fork-knife' style={[styles.icons]} size={20} />
 
-            <Text style={[{ fontSize: 15, color: '#556474' }]}>
+            <Text style={[{ fontSize: 15, color: customStyles.darkGrayText }]}>
               {exprense.category}
             </Text>
 
@@ -73,7 +74,7 @@ export default function Gastos({ navigation }) {
                 source={require('../assets/refundable.png')}
               />
 
-              <Text style={[styles.bolder, { fontSize: 22, color: '#92DD59' }]}>
+              <Text style={[customStyles.bolder, { fontSize: 22, color: '#92DD59' }]}>
                 Reembolsável</Text>
 
             </View>
@@ -91,11 +92,11 @@ export default function Gastos({ navigation }) {
 
             <View style={[]}>
 
-              <Text style={[styles.bolder, { fontSize: 18, color: '#0E3A57' }]}>
+              <Text style={[customStyles.bolder, { fontSize: 18, color: customStyles.darkBlue }]}>
                 {exprense.place}
               </Text>
 
-              <Text style={[{ fontSize: 12, color: '#556474' }]}>
+              <Text style={[{ fontSize: 12, color: customStyles.darkGrayText }]}>
                 {date} - {exprense.hour}
               </Text>
 
@@ -126,26 +127,11 @@ export default function Gastos({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     padding: 25,
-    backgroundColor: '#F5F8FB',
+    backgroundColor: customStyles.gray,
     height: height,
   },
-  dateStyle: {
-    marginLeft: 10,
-    textAlign: 'left',
-    fontSize: 25,
-    color: '#9DADB8'
-  },
-  dayStyle: {
-    fontSize: 16,
-    fontWeight: '300'
-  },
-  floatCenter: {
-    flex: 1,
-    margin: 20,
-    alignSelf: 'flex-start'
-  },
   icons: {
-    color: '#556474',
+    color: customStyles.darkGrayText,
     marginRight: 7,
     opacity: 0.5,
   },
@@ -154,31 +140,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderWidth: 1,
-    borderColor: '#55647450',
+    borderColor: `${customStyles.darkBlue}50`,
     borderRadius: 10,
-  },
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 2,
-  },
-  containerShadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  bolder: {
-    fontWeight: 'bold',
   },
   info: {
     marginBottom: 30
