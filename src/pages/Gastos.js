@@ -7,7 +7,7 @@ import customStyles from '../assets/styles';
 import Expenses from '../assets/gastosGenerate'
 import { Footer, Header } from 'native-base';
 const { width, height } = Dimensions.get('window')
-const KEYS_TO_FILTERS = ['expenses.title', 'title'];
+const keysToFilter = ['expenses.title', 'title'];
 export default function Gastos({ navigation }) {
     const [exprense, setExprense] = useState([]);
     const [total, setTotal] = useState(0);
@@ -34,7 +34,7 @@ export default function Gastos({ navigation }) {
         setLoad({ refreshing: true })
     }
     searchTerms = navigation.getParam('search', false)
-    const filteredExpenses = exprense.filter(createFilter(term, KEYS_TO_FILTERS))
+    const filteredExpenses = exprense.filter(createFilter(term, keysToFilter))
     return (
         <View style={{ flex: 1 }}>
             {/* <PTRView onRefresh={refresh} > */}
